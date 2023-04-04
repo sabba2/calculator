@@ -12,3 +12,10 @@ const subtract = function (...theArgs) {
   }
   return sum;
 };
+
+const multiply = function (...theArgs) {
+  for (let arg of theArgs) {
+    sum *= arg;
+  }
+  return sum;
+};

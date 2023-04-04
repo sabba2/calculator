@@ -5,3 +5,10 @@ const add = function (...theArgs) {
   }
   return sum;
 };
+
+const subtract = function (...theArgs) {
+  for (let arg of theArgs) {
+    sum -= arg;
+  }
+  return sum;
+};

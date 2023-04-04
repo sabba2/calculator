@@ -1,19 +1,23 @@
-let firstNumber;
-let secondSecond;
+let firstNum;
+let secondNum;
 let operator;
 
-const add = function (a, b) {
+function add(a, b) {
   return a + b;
-};
+}
 
-const subtract = function (a, b) {
+function subtract(a, b) {
   return a - b;
-};
+}
 
-const multiply = function (a, b) {
+function multiply(a, b) {
   return a * b;
-};
+}
 
-const divide = function (a, b) {
+function divide(a, b) {
   return a / b;
-};
+}
+
+function operate(operator, firstNum, secondNum) {
+  return operator(firstNum, secondNum);
+}

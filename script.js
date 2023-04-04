@@ -1,28 +1,15 @@
-let sum = 0;
-const add = function (...theArgs) {
-  for (let arg of theArgs) {
-    sum += arg;
-  }
-  return sum;
+const add = function (a, b) {
+  return a + b;
 };
 
-const subtract = function (...theArgs) {
-  for (let arg of theArgs) {
-    sum -= arg;
-  }
-  return sum;
+const subtract = function (a, b) {
+  return a - b;
 };
 
-const multiply = function (...theArgs) {
-  for (let arg of theArgs) {
-    sum *= arg;
-  }
-  return sum;
+const multiply = function (a, b) {
+  return a * b;
 };
 
-const divide = function (...theArgs) {
-  for (let arg of theArgs) {
-    sum /= arg;
-  }
-  return sum;
+const divide = function (a, b) {
+  return a / b;
 };

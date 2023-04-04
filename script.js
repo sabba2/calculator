@@ -19,3 +19,10 @@ const multiply = function (...theArgs) {
   }
   return sum;
 };
+
+const divide = function (...theArgs) {
+  for (let arg of theArgs) {
+    sum /= arg;
+  }
+  return sum;
+};

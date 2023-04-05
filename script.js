@@ -50,12 +50,8 @@ operators.forEach(operatorButton => {
 });
 
 equals.addEventListener("click", () => {
-  // operate on firstNum and secondNum
-  // when this is clicked, displayValue can be stored in secondNum
-  // update display.innerText with solution
-  secondNum = display.innerText;
+  secondNum = parseInt(display.innerText);
   console.log(firstNum, secondNum);
   let result = operate(operator, firstNum, secondNum);
-
   display.innerText = result;
 });

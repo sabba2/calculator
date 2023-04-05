@@ -6,6 +6,7 @@ const display = document.querySelector(".display");
 const numberButtons = Array.from(document.querySelectorAll(".number"));
 const operators = Array.from(document.querySelectorAll(".operator"));
 const equals = document.querySelector(".equals");
+const clear = document.querySelector(".clear");
 
 function add(a, b) {
   return a + b;
@@ -51,7 +52,12 @@ operators.forEach(operatorButton => {
 
 equals.addEventListener("click", () => {
   secondNum = parseInt(display.innerText);
-  console.log(firstNum, secondNum);
   let result = operate(operator, firstNum, secondNum);
   display.innerText = result;
+});
+
+clear.addEventListener("click", () => {
+  firstNum = 0;
+
+  display.innerText = 0;
 });

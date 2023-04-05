@@ -58,6 +58,8 @@ equals.addEventListener("click", () => {
 
 clear.addEventListener("click", () => {
   firstNum = 0;
-
+  secondNum = 0;
+  operator = null;
+  displayValue = 0;
   display.innerText = 0;
 });

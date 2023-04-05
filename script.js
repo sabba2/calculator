@@ -36,7 +36,7 @@ numberButtons.forEach(numberButton => {
 
 operators.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
-    firstNum = displayValue;
+    firstNum = parseInt(displayValue);
     if (operatorButton.classList.contains("add")) {
       operator = add;
     } else if (operatorButton.classList.contains("subtract")) {
@@ -53,6 +53,9 @@ equals.addEventListener("click", () => {
   // operate on firstNum and secondNum
   // when this is clicked, displayValue can be stored in secondNum
   // update display.innerText with solution
-  secondNum = display.innerText; // this will need to be optimised later
+  secondNum = display.innerText;
+  console.log(firstNum, secondNum);
   let result = operate(operator, firstNum, secondNum);
+
+  display.innerText = result;
 });

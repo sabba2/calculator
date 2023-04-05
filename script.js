@@ -5,6 +5,7 @@ let displayValue;
 const display = document.querySelector(".display");
 const numberButtons = Array.from(document.querySelectorAll(".number"));
 const operators = Array.from(document.querySelectorAll(".operator"));
+const equals = document.querySelector(".equals");
 
 function add(a, b) {
   return a + b;
@@ -35,15 +36,23 @@ numberButtons.forEach(numberButton => {
 
 operators.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
-    firstNum = display.innerText;
+    firstNum = displayValue;
     if (operatorButton.classList.contains("add")) {
-      operator = "add";
+      operator = add;
     } else if (operatorButton.classList.contains("subtract")) {
-      operator = "subtract";
+      operator = subtract;
     } else if (operatorButton.classList.contains("divide")) {
-      operator = "divide";
+      operator = divide;
     } else if (operatorButton.classList.contains("multiply")) {
-      operator = "multiply";
+      operator = multiply;
     }
   });
+});
+
+equals.addEventListener("click", () => {
+  // operate on firstNum and secondNum
+  // when this is clicked, displayValue can be stored in secondNum
+  // update display.innerText with solution
+  secondNum = display.innerText; // this will need to be optimised later
+  let result = operate(operator, firstNum, secondNum);
 });

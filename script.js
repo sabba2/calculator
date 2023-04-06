@@ -65,7 +65,7 @@ operators.forEach(operatorButton => {
 });
 
 equals.addEventListener("click", () => {
-  let result = operate(operator, firstNum, secondNum);
+  let result = operate(operator, firstNum, secondNum).toFixed(5);
   display.innerText = result;
 });
 

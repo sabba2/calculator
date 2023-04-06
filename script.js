@@ -1,12 +1,12 @@
-let firstNum;
-let secondNum;
-let operator;
-let displayValue;
+let firstNum = null;
+let secondNum = null;
+let operator = null;
 const display = document.querySelector(".display");
 const numberButtons = Array.from(document.querySelectorAll(".number"));
 const operators = Array.from(document.querySelectorAll(".operator"));
 const equals = document.querySelector(".equals");
 const clear = document.querySelector(".clear");
+let displayValue = null;
 
 function add(a, b) {
   return a + b;
@@ -30,14 +30,23 @@ function operate(operator, firstNum, secondNum) {
 
 numberButtons.forEach(numberButton => {
   numberButton.addEventListener("click", () => {
-    display.innerText = numberButton.innerText;
-    displayValue = display.innerText;
+    if (displayValue === null || displayValue === "0") {
+      displayValue = "";
+    }
+    displayValue += numberButton.innerText;
+    display.innerText = displayValue;
+
+    if (operator === null) {
+      firstNum = parseInt(displayValue);
+    } else {
+      secondNum = parseInt(displayValue);
+    }
   });
 });
 
 operators.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
-    firstNum = parseInt(displayValue);
+    displayValue = null;
     if (operatorButton.classList.contains("add")) {
       operator = add;
     } else if (operatorButton.classList.contains("subtract")) {
@@ -51,15 +60,14 @@ operators.forEach(operatorButton => {
 });
 
 equals.addEventListener("click", () => {
-  secondNum = parseInt(display.innerText);
   let result = operate(operator, firstNum, secondNum);
   display.innerText = result;
 });
 
 clear.addEventListener("click", () => {
-  firstNum = 0;
-  secondNum = 0;
+  firstNum = null;
+  secondNum = null;
   operator = null;
-  displayValue = 0;
+  displayValue = null;
   display.innerText = 0;
 });

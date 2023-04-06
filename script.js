@@ -47,6 +47,11 @@ numberButtons.forEach(numberButton => {
 operators.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
     displayValue = null;
+    if (operator !== null) {
+      let result = operate(operator, firstNum, secondNum);
+      display.innerText = result;
+      firstNum = result;
+    }
     if (operatorButton.classList.contains("add")) {
       operator = add;
     } else if (operatorButton.classList.contains("subtract")) {

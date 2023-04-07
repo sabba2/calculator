@@ -67,6 +67,10 @@ operators.forEach(operatorButton => {
     } else if (operatorButton.classList.contains("multiply")) {
       operator = multiply;
     }
+    if (operator) {
+      // when operator is pressed twice in a row
+      secondNum = firstNum;
+    }
   });
 });
 

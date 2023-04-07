@@ -49,6 +49,12 @@ operators.forEach(operatorButton => {
     displayValue = null;
     if (operator !== null) {
       let result = operate(operator, firstNum, secondNum);
+      if (
+        result.toString().split(".")[1] &&
+        result.toString().split(".")[1].length > 5
+      ) {
+        result = result.toFixed(5);
+      }
       display.innerText = result;
       firstNum = result;
     }
@@ -65,7 +71,14 @@ operators.forEach(operatorButton => {
 });
 
 equals.addEventListener("click", () => {
-  let result = operate(operator, firstNum, secondNum).toFixed(5);
+  let result = operate(operator, firstNum, secondNum);
+  // check if over 5 decimals
+  if (
+    result.toString().split(".")[1] &&
+    result.toString().split(".")[1].length > 5
+  ) {
+    result = result.toFixed(5);
+  }
   display.innerText = result;
 });
 

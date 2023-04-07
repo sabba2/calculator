@@ -6,6 +6,7 @@ const numberButtons = Array.from(document.querySelectorAll(".number"));
 const operators = Array.from(document.querySelectorAll(".operator"));
 const equals = document.querySelector(".equals");
 const clear = document.querySelector(".clear");
+const decimal = document.querySelector(".decimal");
 let displayValue = null;
 
 function add(a, b) {
@@ -35,11 +36,10 @@ numberButtons.forEach(numberButton => {
     }
     displayValue += numberButton.innerText;
     display.innerText = displayValue;
-
     if (operator === null) {
-      firstNum = parseInt(displayValue);
+      firstNum = parseFloat(displayValue);
     } else {
-      secondNum = parseInt(displayValue);
+      secondNum = parseFloat(displayValue);
     }
   });
 });
@@ -98,6 +98,8 @@ equals.addEventListener("click", () => {
     if (display.innerText !== "Impossible.") {
       display.innerText = result;
     }
+    displayValue = null;
+    operator = null;
   }
 });
 
@@ -107,4 +109,15 @@ clear.addEventListener("click", () => {
   operator = null;
   displayValue = null;
   display.innerText = 0;
+});
+
+decimal.addEventListener("click", () => {
+  if (displayValue === null) {
+    displayValue = "0";
+  }
+  // disable decimal button if there is already a decimal
+  if (parseFloat(displayValue) % 1 === 0) {
+    displayValue += decimal.innerText;
+    display.innerText = displayValue;
+  }
 });

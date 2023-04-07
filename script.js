@@ -53,6 +53,7 @@ operators.forEach(operatorButton => {
         result = NaN;
         display.innerText = "Impossible.";
       }
+      // rounds numbers to 5 decimals
       if (
         result.toString().split(".")[1] &&
         result.toString().split(".")[1].length > 5
@@ -83,7 +84,6 @@ operators.forEach(operatorButton => {
 equals.addEventListener("click", () => {
   if (operator) {
     let result = operate(operator, firstNum, secondNum);
-
     // check if over 5 decimals
     if (
       result.toString().split(".")[1] &&
@@ -100,6 +100,7 @@ equals.addEventListener("click", () => {
     }
     displayValue = null;
     operator = null;
+    firstNum = result;
   }
 });
 

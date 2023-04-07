@@ -75,15 +75,17 @@ operators.forEach(operatorButton => {
 });
 
 equals.addEventListener("click", () => {
-  let result = operate(operator, firstNum, secondNum);
-  // check if over 5 decimals
-  if (
-    result.toString().split(".")[1] &&
-    result.toString().split(".")[1].length > 5
-  ) {
-    result = result.toFixed(5);
+  if (operator) {
+    let result = operate(operator, firstNum, secondNum);
+    if (
+      result.toString().split(".")[1] &&
+      result.toString().split(".")[1].length > 5
+    ) {
+      result = result.toFixed(5);
+    }
+    display.innerText = result;
   }
-  display.innerText = result;
+  // check if over 5 decimals
 });
 
 clear.addEventListener("click", () => {

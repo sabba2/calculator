@@ -135,3 +135,13 @@ plusminus.addEventListener("click", () => {
     secondNum = displayValue;
   }
 });
+
+backspace.addEventListener("click", () => {
+  displayValue = null;
+  display.innerText = "0";
+  if (!operator) {
+    firstNum = 0;
+  } else {
+    secondNum = 0;
+  }
+});

@@ -136,6 +136,7 @@ plusminus.addEventListener("click", () => {
   }
 });
 
+// Update to work after clicking equals
 backspace.addEventListener("click", () => {
   displayValue = null;
   display.innerText = "0";
@@ -143,5 +144,15 @@ backspace.addEventListener("click", () => {
     firstNum = 0;
   } else {
     secondNum = 0;
+  }
+});
+
+percent.addEventListener("click", () => {
+  displayValue = parseFloat(display.innerText) / 100;
+  display.innerText = displayValue;
+  if (!operator) {
+    firstNum = displayValue;
+  } else {
+    secondNum = displayValue;
   }
 });

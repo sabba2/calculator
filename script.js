@@ -7,6 +7,9 @@ const operators = Array.from(document.querySelectorAll(".operator"));
 const equals = document.querySelector(".equals");
 const clear = document.querySelector(".clear");
 const decimal = document.querySelector(".decimal");
+const plusminus = document.querySelector(".plusminus");
+const backspace = document.querySelector(".backspace");
+const percent = document.querySelector(".percent");
 let displayValue = null;
 
 function add(a, b) {
@@ -120,5 +123,15 @@ decimal.addEventListener("click", () => {
   if (parseFloat(displayValue) % 1 === 0) {
     displayValue += decimal.innerText;
     display.innerText = displayValue;
+  }
+});
+
+plusminus.addEventListener("click", () => {
+  displayValue = parseFloat(display.innerText) * -1;
+  display.innerText = displayValue;
+  if (!operator) {
+    firstNum = displayValue;
+  } else {
+    secondNum = displayValue;
   }
 });

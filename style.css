@@ -1,0 +1,38 @@
+html {
+  background-color: #000;
+}
+body {
+  min-height: 100vh;
+  max-width: 640px;
+  background-color: papayawhip;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 540px;
+  width: 430px;
+  background-color: #1e1f26;
+}
+
+.display {
+  background-color: #d0e1f9;
+  text-align: center;
+  margin: auto;
+  font-size: 70px;
+  padding: 0;
+}
+
+.row-1,
+.row-2,
+.row-3,
+.row-4,
+.row-5,
+.display {
+  flex: 1 1 auto;
+}

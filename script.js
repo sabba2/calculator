@@ -37,6 +37,9 @@ numberButtons.forEach(numberButton => {
     if (displayValue === null || displayValue === "0") {
       displayValue = "";
     }
+    if (displayValue.length === 11) {
+      return;
+    }
     displayValue += numberButton.innerText;
     display.innerText = displayValue;
     if (operator === null) {
@@ -63,6 +66,7 @@ operators.forEach(operatorButton => {
       ) {
         result = result.toFixed(5);
       }
+      //
       if (display.innerText !== "Impossible.") {
         display.innerText = result;
       }
@@ -94,6 +98,9 @@ equals.addEventListener("click", () => {
     ) {
       result = result.toFixed(5);
     }
+    if (result.toString().length > 11) {
+      result = result.toExponential(4);
+    }
     if (operator === divide && secondNum === 0) {
       result = NaN;
       display.innerText = "Impossible.";
@@ -103,7 +110,7 @@ equals.addEventListener("click", () => {
     }
     displayValue = null;
     operator = null;
-    firstNum = result;
+    firstNum = parseFloat(result);
   }
 });
 
@@ -156,3 +163,5 @@ percent.addEventListener("click", () => {
     secondNum = displayValue;
   }
 });
+
+// Allow for typing to enter numbers

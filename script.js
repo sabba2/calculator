@@ -60,7 +60,9 @@ operators.forEach(operatorButton => {
         display.innerText = "Impossible.";
       }
       // rounds numbers to 5 decimals
-      if (
+      if (result.toString().length > 11) {
+        result = result.toExponential(4);
+      } else if (
         result.toString().split(".")[1] &&
         result.toString().split(".")[1].length > 5
       ) {
@@ -92,17 +94,16 @@ equals.addEventListener("click", () => {
   if (operator) {
     let result = operate(operator, firstNum, secondNum);
     result = parseFloat(result);
-    // check if number too big for display
+    // check if number too big for display & if over 5 decimals
     if (result.toString().length > 11) {
       result = result.toExponential(4);
-    }
-    // check if over 5 decimals
-    else if (
+    } else if (
       result.toString().split(".")[1] &&
       result.toString().split(".")[1].length > 5
     ) {
       result = result.toFixed(5);
     }
+
     if (operator === divide && secondNum === 0) {
       result = NaN;
       display.innerText = "Impossible.";
@@ -110,7 +111,7 @@ equals.addEventListener("click", () => {
     if (display.innerText !== "Impossible.") {
       display.innerText = result;
     }
-    displayValue = null;
+    displayValue = result;
     operator = null;
     firstNum = parseFloat(result);
   }
@@ -125,11 +126,11 @@ clear.addEventListener("click", () => {
 });
 
 decimal.addEventListener("click", () => {
-  if (displayValue.length === 11) {
-    return;
-  }
   if (displayValue === null) {
     displayValue = "0";
+  }
+  if (displayValue.length === 11) {
+    return;
   }
   // disable decimal button if there is already a decimal
   if (!displayValue.includes(".")) {
@@ -139,11 +140,14 @@ decimal.addEventListener("click", () => {
 });
 
 plusminus.addEventListener("click", () => {
-  if (displayValue.length === 11) {
-    return;
-  }
+  // if (displayValue[0] !== "-" || displayValue === "0") {
+  //   return;
+  // }
   displayValue = parseFloat(display.innerText) * -1;
-  display.innerText = displayValue;
+  if (displayValue.toString().length >= 11) {
+    displayValue = displayValue.toExponential(4);
+    display.innerText = displayValue;
+  }
   if (!operator) {
     firstNum = displayValue;
   } else {

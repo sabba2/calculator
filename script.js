@@ -156,12 +156,17 @@ plusminus.addEventListener("click", () => {
 
 // Update to work after clicking equals
 backspace.addEventListener("click", () => {
-  displayValue = null;
-  display.innerText = "0";
-  if (!operator) {
-    firstNum = 0;
+  if (displayValue.length !== 1) {
+    displayValue = display.innerText.slice(0, -1);
+    display.innerText = displayValue;
   } else {
-    secondNum = 0;
+    displayValue = "0";
+    display.innerText = displayValue;
+  }
+  if (!operator) {
+    firstNum = displayValue;
+  } else {
+    secondNum = displayValue;
   }
 });
 
@@ -182,3 +187,21 @@ percent.addEventListener("click", () => {
 });
 
 // Allow for typing to enter numbers
+window.addEventListener("keydown", e => {
+  const numberButton = document.querySelector(`button[data-key="${e.code}"]`);
+  if (displayValue === null || displayValue === "0") {
+    displayValue = "";
+  }
+  if (displayValue.length === 11) {
+    return;
+  }
+  displayValue += numberButton.innerText;
+  display.innerText = displayValue;
+  if (operator === null) {
+    firstNum = parseFloat(displayValue);
+  } else {
+    secondNum = parseFloat(displayValue);
+  }
+});
+
+// update backspace to only remove 1 number

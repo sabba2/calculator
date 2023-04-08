@@ -39,11 +39,11 @@ body {
 }
 
 .display {
-  border: 4px solid #1e1f26;
+  border: 3px solid #1e1f26;
   width: 100%;
   background-color: #d0e1f9;
   justify-content: end;
-  font-size: 70px;
+  font-size: 60px;
   padding-right: 15px;
   border-radius: 8px;
 }
@@ -54,9 +54,23 @@ button {
   height: 100%;
   font-size: 30px;
   border-radius: 10px;
-  border: 4px solid #1e1f26;
+  border: 3px solid #1e1f26;
 }
 
+button.number:active,
+button.plusminus:active,
+button.decimal:active {
+  background-color: #7e8699;
+}
+
+button.operator:active,
+button.equals:active,
+button.backspace:active,
+button.clear:active,
+button.percent:active {
+  background-color: #d0e1f9;
+  color: #4d648d;
+}
 .number,
 .plusminus,
 .decimal {
@@ -73,9 +87,11 @@ button {
   color: #d0e1f9;
 }
 
-/* Colour scheme monocharmatic blues/purples
+/* Colour scheme monochramatic blues/purples
 #1E1F26
 #283655
 #4D648D
 #D0E1F9
 */
+
+/* add a push down effect */

@@ -144,8 +144,11 @@ plusminus.addEventListener("click", () => {
   //   return;
   // }
   displayValue = parseFloat(display.innerText) * -1;
+  console.log(displayValue);
   if (displayValue.toString().length >= 11) {
     displayValue = displayValue.toExponential(4);
+    display.innerText = displayValue;
+  } else {
     display.innerText = displayValue;
   }
   if (!operator) {

@@ -140,11 +140,7 @@ decimal.addEventListener("click", () => {
 });
 
 plusminus.addEventListener("click", () => {
-  // if (displayValue[0] !== "-" || displayValue === "0") {
-  //   return;
-  // }
   displayValue = parseFloat(display.innerText) * -1;
-  console.log(displayValue);
   if (displayValue.toString().length >= 11) {
     displayValue = displayValue.toExponential(4);
     display.innerText = displayValue;
@@ -171,7 +167,13 @@ backspace.addEventListener("click", () => {
 
 percent.addEventListener("click", () => {
   displayValue = parseFloat(display.innerText) / 100;
-  display.innerText = displayValue;
+  if (displayValue.toString().length >= 11) {
+    displayValue = displayValue.toExponential(4);
+    display.innerText = displayValue;
+  } else {
+    display.innerText = displayValue;
+  }
+
   if (!operator) {
     firstNum = displayValue;
   } else {

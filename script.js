@@ -91,15 +91,9 @@ operators.forEach(operatorButton => {
 equals.addEventListener("click", () => {
   if (operator) {
     let result = operate(operator, firstNum, secondNum);
-
     result = parseFloat(result);
-    console.log(firstNum);
-    console.log(secondNum);
-    console.log(typeof result);
-
     // check if number too big for display
     if (result.toString().length > 11) {
-      console.log(typeof result);
       result = result.toExponential(4);
     }
     // check if over 5 decimals
@@ -109,9 +103,6 @@ equals.addEventListener("click", () => {
     ) {
       result = result.toFixed(5);
     }
-    {
-    }
-
     if (operator === divide && secondNum === 0) {
       result = NaN;
       display.innerText = "Impossible.";
@@ -134,6 +125,9 @@ clear.addEventListener("click", () => {
 });
 
 decimal.addEventListener("click", () => {
+  if (displayValue.length === 11) {
+    return;
+  }
   if (displayValue === null) {
     displayValue = "0";
   }
@@ -145,6 +139,9 @@ decimal.addEventListener("click", () => {
 });
 
 plusminus.addEventListener("click", () => {
+  if (displayValue.length === 11) {
+    return;
+  }
   displayValue = parseFloat(display.innerText) * -1;
   display.innerText = displayValue;
   if (!operator) {

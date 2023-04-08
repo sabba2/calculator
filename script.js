@@ -132,7 +132,7 @@ decimal.addEventListener("click", () => {
     displayValue = "0";
   }
   // disable decimal button if there is already a decimal
-  if (parseFloat(displayValue) % 1 === 0) {
+  if (!displayValue.includes(".")) {
     displayValue += decimal.innerText;
     display.innerText = displayValue;
   }

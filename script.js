@@ -175,7 +175,7 @@ plusminus.addEventListener("click", () => {
 
 // Update to work after clicking equals
 backspace.addEventListener("click", () => {
-  if (displayValue.length !== 1) {
+  if (displayValue === null || displayValue.length !== 1) {
     displayValue = display.innerText.slice(0, -1);
     display.innerText = displayValue;
   } else {
@@ -205,7 +205,7 @@ percent.addEventListener("click", () => {
   }
 });
 
-// Allow for typing to enter numbers
+// ** Section below allows for above logic to be performed with keys ** //
 window.addEventListener("keydown", e => {
   let button = document.querySelector(`.${e.code}`);
   if (button && button.classList.contains("number")) {
@@ -246,7 +246,7 @@ window.addEventListener("keydown", e => {
         result = NaN;
         display.innerText = "Impossible.";
       }
-      // rounds numbers to 5 decimals
+      // rounds numbers to 5 decimals & converts to exponential
       if (result.toString().length > 11) {
         result = result.toExponential(4);
       } else if (
@@ -261,7 +261,6 @@ window.addEventListener("keydown", e => {
       }
       firstNum = result;
     }
-
     //
     if (button.classList.contains("add")) {
       operator = add;

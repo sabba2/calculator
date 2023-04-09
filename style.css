@@ -20,6 +20,7 @@ body {
   background-color: #1e1f26;
   padding: 8px;
   border-radius: 10px;
+  flex: 0 0 auto;
 }
 
 .row-1,

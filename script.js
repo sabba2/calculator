@@ -34,7 +34,7 @@ function operate(operator, firstNum, secondNum) {
 
 numberButtons.forEach(numberButton => {
   numberButton.addEventListener("click", () => {
-    if (displayValue === null || displayValue === "0") {
+    if (displayValue === null || displayValue == 0) {
       displayValue = "";
     }
     if (displayValue.length === 11) {
@@ -125,7 +125,6 @@ equals.addEventListener("click", () => {
     }
 
     // needs to handle very small results as divisions
-
     if (operator === divide && secondNum === 0) {
       result = NaN;
       display.innerText = "Impossible.";
@@ -133,6 +132,7 @@ equals.addEventListener("click", () => {
     if (display.innerText !== "Impossible.") {
       display.innerText = result;
     }
+
     displayValue = result;
     operator = null;
     firstNum = parseFloat(result);

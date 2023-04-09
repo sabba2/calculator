@@ -111,10 +111,7 @@ equals.addEventListener("click", () => {
   if (operator) {
     let result = operate(operator, firstNum, secondNum);
     result = parseFloat(result);
-    console.log(result);
     // check if number too big for display & if over 5 decimals
-    // needs to handle very small results as divisions
-
     if (
       result.toString().split(".")[1] &&
       result.toString().split(".")[1].length > 5
@@ -125,7 +122,6 @@ equals.addEventListener("click", () => {
       result = result.toExponential(4);
     }
 
-    // needs to handle very small results as divisions
     if (operator === divide && secondNum === 0) {
       result = NaN;
       display.innerText = "Impossible.";
@@ -227,14 +223,30 @@ window.addEventListener("keydown", e => {
       secondNum = parseFloat(displayValue);
     }
   }
+
   if (button && button.classList.contains("operator")) {
     displayValue = null;
+    // Reassigns operator if a different one is pressed in succession
+    if (operator && !button.classList.contains(`${operator.name}`)) {
+      if (button.classList.contains("add")) {
+        operator = add;
+      } else if (button.classList.contains("subtract")) {
+        operator = subtract;
+      } else if (button.classList.contains("divide")) {
+        operator = divide;
+      } else if (button.classList.contains("multiply")) {
+        operator = multiply;
+      }
+      return;
+    }
+    // Logic to evaluate pressing two operators in a row
     if (operator !== null) {
       let result = operate(operator, firstNum, secondNum);
       if (operator === divide && secondNum === 0) {
         result = NaN;
         display.innerText = "Impossible.";
       }
+      // rounds numbers to 5 decimals
       if (result.toString().length > 11) {
         result = result.toExponential(4);
       } else if (
@@ -243,12 +255,14 @@ window.addEventListener("keydown", e => {
       ) {
         result = result.toFixed(5);
       }
-      //
+
       if (display.innerText !== "Impossible.") {
         display.innerText = result;
       }
       firstNum = result;
     }
+
+    //
     if (button.classList.contains("add")) {
       operator = add;
     } else if (button.classList.contains("subtract")) {
@@ -259,19 +273,22 @@ window.addEventListener("keydown", e => {
       operator = multiply;
     }
     if (operator) {
+      // when operator is pressed twice in a row
       secondNum = firstNum;
     }
   }
 
   if (button && button.classList.contains("equals")) {
+    displayValue = null;
     if (operator) {
       let result = operate(operator, firstNum, secondNum);
       result = parseFloat(result);
+      // check if number too big for display & if over 5 decimals
       if (
         result.toString().split(".")[1] &&
         result.toString().split(".")[1].length > 5
       ) {
-        result = result.toFixed(5);
+        result = parseFloat(result.toFixed(5));
       }
       if (result.toString().length > 11) {
         result = result.toExponential(4);
@@ -284,6 +301,7 @@ window.addEventListener("keydown", e => {
       if (display.innerText !== "Impossible.") {
         display.innerText = result;
       }
+
       displayValue = result;
       operator = null;
       firstNum = parseFloat(result);
@@ -297,9 +315,24 @@ window.addEventListener("keydown", e => {
     if (displayValue.length === 11) {
       return;
     }
+    // disable decimal button if there is already a decimal
     if (!displayValue.includes(".")) {
       displayValue += decimal.innerText;
       display.innerText = displayValue;
+    }
+  }
+  if (button && button.classList.contains("backspace")) {
+    if (displayValue.length !== 1) {
+      displayValue = display.innerText.slice(0, -1);
+      display.innerText = displayValue;
+    } else {
+      displayValue = "0";
+      display.innerText = displayValue;
+    }
+    if (!operator) {
+      firstNum = displayValue;
+    } else {
+      secondNum = displayValue;
     }
   }
 });

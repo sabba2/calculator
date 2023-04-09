@@ -53,6 +53,20 @@ numberButtons.forEach(numberButton => {
 operators.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
     displayValue = null;
+    // Reassigns operator if a different one is pressed in succession
+    if (operator && !operatorButton.classList.contains(`${operator.name}`)) {
+      if (operatorButton.classList.contains("add")) {
+        operator = add;
+      } else if (operatorButton.classList.contains("subtract")) {
+        operator = subtract;
+      } else if (operatorButton.classList.contains("divide")) {
+        operator = divide;
+      } else if (operatorButton.classList.contains("multiply")) {
+        operator = multiply;
+      }
+      return;
+    }
+    // Logic to evaluate pressing two operators in a row
     if (operator !== null) {
       let result = operate(operator, firstNum, secondNum);
       if (operator === divide && secondNum === 0) {
@@ -68,12 +82,14 @@ operators.forEach(operatorButton => {
       ) {
         result = result.toFixed(5);
       }
-      //
+
       if (display.innerText !== "Impossible.") {
         display.innerText = result;
       }
       firstNum = result;
     }
+
+    //
     if (operatorButton.classList.contains("add")) {
       operator = add;
     } else if (operatorButton.classList.contains("subtract")) {
@@ -91,18 +107,24 @@ operators.forEach(operatorButton => {
 });
 
 equals.addEventListener("click", () => {
+  displayValue = null;
   if (operator) {
     let result = operate(operator, firstNum, secondNum);
     result = parseFloat(result);
+    console.log(result);
     // check if number too big for display & if over 5 decimals
-    if (result.toString().length > 11) {
-      result = result.toExponential(4);
-    } else if (
+    // needs to handle very small results as divisions
+    if (
       result.toString().split(".")[1] &&
       result.toString().split(".")[1].length > 5
     ) {
-      result = result.toFixed(5);
+      result = parseFloat(result.toFixed(5));
     }
+    if (result.length > 11) {
+      result = result.toExponential(4);
+    }
+
+    // needs to handle very small results as divisions
 
     if (operator === divide && secondNum === 0) {
       result = NaN;
@@ -188,20 +210,95 @@ percent.addEventListener("click", () => {
 
 // Allow for typing to enter numbers
 window.addEventListener("keydown", e => {
-  const numberButton = document.querySelector(`button[data-key="${e.code}"]`);
-  if (displayValue === null || displayValue === "0") {
-    displayValue = "";
+  let button = document.querySelector(`.${e.code}`);
+  if (button && button.classList.contains("number")) {
+    if (displayValue === null || displayValue === "0") {
+      displayValue = "";
+    }
+    if (displayValue.length === 11) {
+      return;
+    }
+    displayValue += button.innerText;
+    display.innerText = displayValue;
+    if (operator === null) {
+      firstNum = parseFloat(displayValue);
+    } else {
+      secondNum = parseFloat(displayValue);
+    }
   }
-  if (displayValue.length === 11) {
-    return;
+  if (button && button.classList.contains("operator")) {
+    displayValue = null;
+    if (operator !== null) {
+      let result = operate(operator, firstNum, secondNum);
+      if (operator === divide && secondNum === 0) {
+        result = NaN;
+        display.innerText = "Impossible.";
+      }
+      if (result.toString().length > 11) {
+        result = result.toExponential(4);
+      } else if (
+        result.toString().split(".")[1] &&
+        result.toString().split(".")[1].length > 5
+      ) {
+        result = result.toFixed(5);
+      }
+      //
+      if (display.innerText !== "Impossible.") {
+        display.innerText = result;
+      }
+      firstNum = result;
+    }
+    if (button.classList.contains("add")) {
+      operator = add;
+    } else if (button.classList.contains("subtract")) {
+      operator = subtract;
+    } else if (button.classList.contains("divide")) {
+      operator = divide;
+    } else if (button.classList.contains("multiply")) {
+      operator = multiply;
+    }
+    if (operator) {
+      secondNum = firstNum;
+    }
   }
-  displayValue += numberButton.innerText;
-  display.innerText = displayValue;
-  if (operator === null) {
-    firstNum = parseFloat(displayValue);
-  } else {
-    secondNum = parseFloat(displayValue);
+
+  if (button && button.classList.contains("equals")) {
+    if (operator) {
+      let result = operate(operator, firstNum, secondNum);
+      result = parseFloat(result);
+      if (
+        result.toString().split(".")[1] &&
+        result.toString().split(".")[1].length > 5
+      ) {
+        result = result.toFixed(5);
+      }
+      if (result.toString().length > 11) {
+        result = result.toExponential(4);
+      }
+
+      if (operator === divide && secondNum === 0) {
+        result = NaN;
+        display.innerText = "Impossible.";
+      }
+      if (display.innerText !== "Impossible.") {
+        display.innerText = result;
+      }
+      displayValue = result;
+      operator = null;
+      firstNum = parseFloat(result);
+    }
+  }
+
+  if (button && button.classList.contains("decimal")) {
+    if (displayValue === null) {
+      displayValue = "0";
+    }
+    if (displayValue.length === 11) {
+      return;
+    }
+    if (!displayValue.includes(".")) {
+      displayValue += decimal.innerText;
+      display.innerText = displayValue;
+    }
   }
 });
-
-// update backspace to only remove 1 number

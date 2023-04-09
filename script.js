@@ -114,13 +114,14 @@ equals.addEventListener("click", () => {
     console.log(result);
     // check if number too big for display & if over 5 decimals
     // needs to handle very small results as divisions
+
     if (
       result.toString().split(".")[1] &&
       result.toString().split(".")[1].length > 5
     ) {
       result = parseFloat(result.toFixed(5));
     }
-    if (result.length > 11) {
+    if (result.toString().length > 11) {
       result = result.toExponential(4);
     }
 

@@ -1,3 +1,7 @@
+// Potential to optimise code further and clean up unnecessary lines and variable settings.
+
+// Potential to create more functions for actions that exist within event listeners, can prevent duplication in keydown section.
+
 let firstNum = null;
 let secondNum = null;
 let operator = null;
@@ -88,7 +92,6 @@ operators.forEach(operatorButton => {
       }
       firstNum = result;
     }
-
     //
     if (operatorButton.classList.contains("add")) {
       operator = add;
@@ -173,7 +176,6 @@ plusminus.addEventListener("click", () => {
   }
 });
 
-// Update to work after clicking equals
 backspace.addEventListener("click", () => {
   if (displayValue === null || displayValue.length !== 1) {
     displayValue = display.innerText.slice(0, -1);
